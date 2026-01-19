@@ -1,11 +1,7 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://aistudio.google.com/apps/drive/1vrP2gORsSfWeq3AVcv1OpWibRdCEW7FM?fullscreenApplet=true&showPreview=true&showAssistant=true" />
+<img width="1200" height="475" alt="GHBanner" src="" />
 </div>
 
-
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.studio/apps/drive/1vrP2gORsSfWeq3AVcv1OpWibRdCEW7FM?fullscreenApplet=true" />
-</div>
 
 
 
@@ -13,7 +9,7 @@
 
 This contains everything you need to run your app locally.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1vrP2gORsSfWeq3AVcv1OpWibRdCEW7FM
+View your app in AI Studio: https://ai.studio/apps/drive/1vrP2gORsSfWeq3AVcv1OpWibRdCEW7FM](https://aistudio.google.com/apps/drive/1vrP2gORsSfWeq3AVcv1OpWibRdCEW7FM?fullscreenApplet=true&showPreview=true&showAssistant=true
 
 ## Run Locally
 
