@@ -25,7 +25,7 @@
    - 点击 **Add New**（添加新变量）按钮
    - 填写以下信息：
      - **Name（名称）**: `GEMINI_API_KEY`
-     - **Value（值）**: `AIzaSyAmZtlPSA7Vwqf_gCwD5Tsc1PWBU0VLXvo`
+     - **Value（值）**: 
      - **Environment（环境）**: 
        - ✅ **Production**（生产环境）⚠️ **非常重要！**
        - ✅ **Preview**（预览环境）
@@ -125,7 +125,7 @@
 ## 验证清单
 
 - [ ] 在 Vercel 中设置了 `GEMINI_API_KEY` 环境变量
-- [ ] 值为：`AIzaSyAmZtlPSA7Vwqf_gCwD5Tsc1PWBU0VLXvo`
+- [ ] 值为：`
 - [ ] 已启用 **Production** 环境
 - [ ] 已启用 **Preview** 环境（可选）
 - [ ] 已启用 **Development** 环境（可选）

@@ -53,7 +53,7 @@ touch .env.local
 编辑 `.env.local` 文件，添加以下内容：
 
 ```
-GEMINI_API_KEY=AIzaSyAmZtlPSA7Vwqf_gCwD5Tsc1PWBU0VLXvo
+GEMINI_API_KEY=
 ```
 
 **重要提示**：
@@ -115,7 +115,7 @@ cd "/Users/emmawang/Library/Mobile Documents/com~apple~CloudDocs/Emma My Product
 npm install
 
 # 3. 创建环境变量文件（仅第一次需要）
-echo "GEMINI_API_KEY=AIzaSyAmZtlPSA7Vwqf_gCwD5Tsc1PWBU0VLXvo" > .env.local
+echo "GEMINI_API_KEY=" > .env.local
 
 # 4. 启动开发服务器
 npm run dev
