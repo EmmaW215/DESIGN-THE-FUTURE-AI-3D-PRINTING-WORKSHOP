@@ -2,7 +2,14 @@
 import { GoogleGenAI } from "@google/genai";
 
 export const getProjectIdea = async (interest: string, levelName: string) => {
-  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+  const apiKey = process.env.GEMINI_API_KEY;
+  
+  if (!apiKey) {
+    console.error("GEMINI_API_KEY is not set");
+    return "Error: API Key is not configured. Please contact support.";
+  }
+  
+  const ai = new GoogleGenAI({ apiKey });
   
   const prompt = `Act as a Boutique 3D Printing & AI STEM Educator for kids aged 8-14. 
   A student is interested in "${interest}" and is in the "${levelName}" class. 
