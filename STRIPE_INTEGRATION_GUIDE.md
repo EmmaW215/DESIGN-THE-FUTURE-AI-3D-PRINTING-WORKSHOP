@@ -1,12 +1,12 @@
 # Stripe 支付集成完整指南
 
 ## 概述
-本指南将帮助你将项目连接到真实的 Stripe 账户：`acct_1RlrH1E6OOEHr6Zo`
+本指南将帮助你将项目连接到真实的 Stripe 账户：``
 
 ## 步骤 1: 在 Stripe Dashboard 创建产品
 
 ### 1.1 登录 Stripe Dashboard
-访问：https://dashboard.stripe.com/acct_1RlrH1E6OOEHr6Zo/payments
+访问：
 
 ### 1.2 创建产品
 为每个课程级别创建产品和价格：
