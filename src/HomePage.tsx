@@ -19,7 +19,7 @@ import {
   QrCode,
   Phone
 } from 'lucide-react';
-import { getProjectIdea } from './services/geminiService';
+import { getProjectIdea } from '../services/geminiService';
 
 export default function HomePage() {
   const [interest, setInterest] = useState('');
