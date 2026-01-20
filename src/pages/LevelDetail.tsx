@@ -73,13 +73,32 @@ export default function LevelDetail() {
     document.getElementById('sessions')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Navbar */}
-      <Navbar levelTag={course.tag} levelName={course.name} theme={theme} />
+  // Background image for Level 1
+  const backgroundImageStyle = courseId === 1 ? {
+    backgroundImage: 'url(/ideogram-v3.0_Create_level1.jpg)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+  } : {};
 
-      {/* Hero Section */}
-      <section className={`relative overflow-hidden ${theme.bg}`}>
+  return (
+    <div 
+      className="min-h-screen bg-gradient-to-b from-gray-50 to-white relative"
+      style={backgroundImageStyle}
+    >
+      {/* Background overlay for better text readability - 40% transparency */}
+      {courseId === 1 && (
+        <div className="fixed inset-0 bg-white/55 pointer-events-none z-0" />
+      )}
+      
+      {/* Content wrapper with relative positioning */}
+      <div className="relative z-10">
+        {/* Navbar */}
+        <Navbar levelTag={course.tag} levelName={course.name} theme={theme} />
+
+        {/* Hero Section */}
+        <section className={`relative overflow-hidden ${theme.bg}`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
           {/* Level Badge */}
           <div className="flex items-center gap-3 mb-4">
@@ -148,117 +167,118 @@ export default function LevelDetail() {
           </div>
         </div>
 
-        {/* Decorative Element */}
-        <div className={`absolute -right-20 -bottom-20 w-64 h-64 rounded-full ${theme.badge} opacity-5`} />
-      </section>
+          {/* Decorative Element */}
+          <div className={`absolute -right-20 -bottom-20 w-64 h-64 rounded-full ${theme.badge} opacity-5`} />
+        </section>
 
-      {/* Description Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-        <p className="text-lg text-gray-600 leading-relaxed">
-          {course.description}
-        </p>
-      </section>
+        {/* Description Section */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+          <p className="text-lg text-gray-600 leading-relaxed">
+            {course.description}
+          </p>
+        </section>
 
-      {/* Sessions Section */}
-      <section id="sessions" className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-        <div className="flex items-center gap-3 mb-6">
-          <Sparkles className={`w-6 h-6 ${theme.text}`} />
-          <h2 className="text-2xl font-bold text-gray-900">Course Sessions</h2>
-        </div>
-        <p className="text-gray-500 mb-6">
-          Each session is {course.sessionDuration}. Click to expand and see details.
-        </p>
+        {/* Sessions Section */}
+        <section id="sessions" className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+          <div className="flex items-center gap-3 mb-6">
+            <Sparkles className={`w-6 h-6 ${theme.text}`} />
+            <h2 className="text-2xl font-bold text-gray-900">Course Sessions</h2>
+          </div>
+          <p className="text-gray-500 mb-6">
+            Each session is {course.sessionDuration}. Click to expand and see details.
+          </p>
 
-        <div className="space-y-4">
-          {course.sessions.map((session, index) => (
-            <SessionCard
-              key={session.id}
-              session={session}
-              theme={theme}
-              defaultExpanded={index === 0}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* Requirements Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-          <CheckCircle2 className={`w-6 h-6 ${theme.text}`} />
-          Requirements
-        </h2>
-        <div className={`p-6 rounded-2xl ${theme.bg} border ${theme.borderLight}`}>
-          <ul className="space-y-3">
-            {course.requirements.map((req, index) => (
-              <li key={index} className="flex items-start gap-3 text-gray-700">
-                <CheckCircle2 className={`w-5 h-5 mt-0.5 ${theme.text} flex-shrink-0`} />
-                {req}
-              </li>
+          <div className="space-y-4">
+            {course.sessions.map((session, index) => (
+              <SessionCard
+                key={session.id}
+                session={session}
+                theme={theme}
+                defaultExpanded={index === 0}
+              />
             ))}
-          </ul>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* What's Included Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          ✨ What's Included?
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {course.included.map((item, index) => (
-            <div
-              key={index}
-              className="p-4 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-center"
-            >
-              <div className="text-3xl mb-2">{item.icon}</div>
-              <h3 className="font-semibold text-gray-800 mb-1">{item.title}</h3>
-              <p className="text-xs text-gray-500">{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        {/* Requirements Section */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+            <CheckCircle2 className={`w-6 h-6 ${theme.text}`} />
+            Requirements
+          </h2>
+          <div className={`p-6 rounded-2xl ${theme.bg} border ${theme.borderLight}`}>
+            <ul className="space-y-3">
+              {course.requirements.map((req, index) => (
+                <li key={index} className="flex items-start gap-3 text-gray-700">
+                  <CheckCircle2 className={`w-5 h-5 mt-0.5 ${theme.text} flex-shrink-0`} />
+                  {req}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
-      {/* Enrollment CTA Section */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
-        <div className={`p-8 rounded-3xl bg-gradient-to-br ${theme.bg} border-2 ${theme.border}`}>
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
-              💳 Ready to Enroll?
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Join our {course.fullName} program and start your 3D printing journey!
-            </p>
-
-            <div className="inline-block p-6 rounded-2xl bg-white shadow-lg mb-6">
-              <div className="flex items-baseline justify-center gap-1 mb-2">
-                <span className={`text-4xl font-bold ${theme.textDark}`}>
-                  ${course.price}
-                </span>
-                <span className="text-gray-500">{course.currency}</span>
+        {/* What's Included Section */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            ✨ What's Included?
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {course.included.map((item, index) => (
+              <div
+                key={index}
+                className="p-4 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-center"
+              >
+                <div className="text-3xl mb-2">{item.icon}</div>
+                <h3 className="font-semibold text-gray-800 mb-1">{item.title}</h3>
+                <p className="text-xs text-gray-500">{item.description}</p>
               </div>
-              <p className="text-gray-500 text-sm">
-                {course.sessions.length} Sessions • {course.sessionDuration}
+            ))}
+          </div>
+        </section>
+
+        {/* Enrollment CTA Section */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+          <div className={`p-8 rounded-3xl bg-gradient-to-br ${theme.bg} border-2 ${theme.border}`}>
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                💳 Ready to Enroll?
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Join our {course.fullName} program and start your 3D printing journey!
+              </p>
+
+              <div className="inline-block p-6 rounded-2xl bg-white shadow-lg mb-6">
+                <div className="flex items-baseline justify-center gap-1 mb-2">
+                  <span className={`text-4xl font-bold ${theme.textDark}`}>
+                    ${course.price}
+                  </span>
+                  <span className="text-gray-500">{course.currency}</span>
+                </div>
+                <p className="text-gray-500 text-sm">
+                  {course.sessions.length} Sessions • {course.sessionDuration}
+                </p>
+              </div>
+
+              <button
+                onClick={handleEnroll}
+                className={`w-full sm:w-auto px-10 py-4 rounded-xl bg-gradient-to-r ${theme.gradient} text-white font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all flex items-center justify-center gap-3 mx-auto`}
+              >
+                <Lock className="w-5 h-5" />
+                Secure Checkout with Stripe
+              </button>
+
+              <p className="text-xs text-gray-400 mt-4 flex items-center justify-center gap-2">
+                <Lock className="w-3 h-3" />
+                Secure payment powered by Stripe
               </p>
             </div>
-
-            <button
-              onClick={handleEnroll}
-              className={`w-full sm:w-auto px-10 py-4 rounded-xl bg-gradient-to-r ${theme.gradient} text-white font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all flex items-center justify-center gap-3 mx-auto`}
-            >
-              <Lock className="w-5 h-5" />
-              Secure Checkout with Stripe
-            </button>
-
-            <p className="text-xs text-gray-400 mt-4 flex items-center justify-center gap-2">
-              <Lock className="w-3 h-3" />
-              Secure payment powered by Stripe
-            </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer Spacing */}
-      <div className="h-16" />
+        {/* Footer Spacing */}
+        <div className="h-16" />
+      </div>
     </div>
   );
 }
