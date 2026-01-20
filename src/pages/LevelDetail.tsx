@@ -95,7 +95,7 @@ export default function LevelDetail() {
     >
       {/* Background overlay for better text readability - 30% transparency (70% white overlay) */}
       {backgroundImages[courseId] && (
-        <div className="fixed inset-0 bg-white/70 pointer-events-none z-0" />
+        <div className="fixed inset-0 bg-white/75 pointer-events-none z-0" />
       )}
       
       {/* Content wrapper with relative positioning */}
