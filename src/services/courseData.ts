@@ -91,10 +91,10 @@ export interface CourseLevel {
 export const STRIPE_CONFIG = {
   publicKey: import.meta.env.VITE_STRIPE_PUBLIC_KEY || 'pk_test_PLACEHOLDER',
   priceIds: {
-    level1: 'price_1Srn7nE6OOEHr6Zob1pqAXtl', // Level 1 - Explorer ($145 CAD)
-    level2: 'price_1Srn8VE6OOEHr6Zo6Q8vWXIU', // Level 2 - Apprentice ($185 CAD)
-    level3: 'price_1Srn95E6OOEHr6ZoVBBwVBtT', // Level 3 - AI Pro ($225 CAD)
-    level3_workshop: 'price_1Srn9aE6OOEHr6ZoBVVO6Ry5', // Level 3 Advanced Workshop ($80 CAD)
+    level1: 'price_1SrnggE6OOEHr6ZonioPGLNr', // Level 1 - Explorer ($145 CAD)
+    level2: 'price_1SrnhaE6OOEHr6ZoQ0uVD1IQ', // Level 2 - Apprentice ($185 CAD)
+    level3: 'price_1SrniPE6OOEHr6ZoM0gnIkP7', // Level 3 - AI Pro ($225 CAD)
+    level3_workshop: 'price_1SrnjOE6OOEHr6ZoJfVfHkmG', // Level 3 Advanced Workshop ($80 CAD)
   },
   successUrl: `${window.location.origin}/success`,
   cancelUrl: `${window.location.origin}`,
