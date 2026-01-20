@@ -73,9 +73,15 @@ export default function LevelDetail() {
     document.getElementById('sessions')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Background image for Level 1
-  const backgroundImageStyle = courseId === 1 ? {
-    backgroundImage: 'url(/ideogram-v3.0_Create_level1.jpg)',
+  // Background images for each level
+  const backgroundImages: Record<number, string> = {
+    1: '/ideogram-v3.0_Create_level1.jpg',
+    2: '/ideogram-v3.0_Create_level2.jpg',
+    3: '/ideogram-v3.0_Create_level3.jpg',
+  };
+
+  const backgroundImageStyle = backgroundImages[courseId] ? {
+    backgroundImage: `url(${backgroundImages[courseId]})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -87,9 +93,9 @@ export default function LevelDetail() {
       className="min-h-screen bg-gradient-to-b from-gray-50 to-white relative"
       style={backgroundImageStyle}
     >
-      {/* Background overlay for better text readability - 40% transparency */}
-      {courseId === 1 && (
-        <div className="fixed inset-0 bg-white/55 pointer-events-none z-0" />
+      {/* Background overlay for better text readability - 30% transparency (70% white overlay) */}
+      {backgroundImages[courseId] && (
+        <div className="fixed inset-0 bg-white/70 pointer-events-none z-0" />
       )}
       
       {/* Content wrapper with relative positioning */}
