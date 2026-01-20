@@ -186,6 +186,14 @@ git reset --soft HEAD~1
 
 # 或者完全删除最后一次提交
 git reset --hard HEAD~1
+
+
+
+如果通过 GitHub 网页修改了文件，推送前先执行：
+git pull origin maingit push origin main
+这样可以保持本地和远程的同步。
+
+
 ```
 
 **⚠️ 警告**: `git reset --hard` 会永久删除更改，使用前请确认！
@@ -210,3 +218,7 @@ git reset --hard HEAD~1
 1. 查看 Git 帮助: `git help <command>`
 2. 查看错误信息的详细说明
 3. 参考 GitHub 文档: https://docs.github.com/
+
+
+
+

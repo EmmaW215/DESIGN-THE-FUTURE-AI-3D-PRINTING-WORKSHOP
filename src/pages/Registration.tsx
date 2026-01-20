@@ -18,21 +18,47 @@ export default function Registration() {
     }
   }, []);
 
-  const handleNewRegistration = (data: any) => {
+  // Google Sheets API URL from environment variable
+  const GOOGLE_SHEETS_API_URL = import.meta.env.VITE_GOOGLE_SHEETS_API_URL || '';
+
+  const handleNewRegistration = async (data: any) => {
     setIsSyncing(true);
-    // Simulate cloud latency
-    setTimeout(() => {
+    
+    try {
+      // 1. Save to localStorage first (as backup)
       const updated = [data, ...globalRegistrations];
       setGlobalRegistrations(updated);
       localStorage.setItem('dtf_registrations', JSON.stringify(updated));
-      setIsSyncing(false);
       
-      // Developer Note: To link to your ACTUAL Google Sheet:
-      // fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
-      //   method: 'POST',
-      //   body: JSON.stringify(data)
-      // });
-    }, 1200);
+      // 2. Sync to Google Sheets if API URL is configured
+      if (GOOGLE_SHEETS_API_URL) {
+        try {
+          const response = await fetch(GOOGLE_SHEETS_API_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Required for Google Apps Script Web App
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+          
+          // Note: With no-cors mode, we can't read the response
+          // but the data should still be sent successfully
+          console.log('✅ Registration data sent to Google Sheets');
+        } catch (error) {
+          console.error('❌ Failed to sync to Google Sheets:', error);
+          // Data is still saved in localStorage, so no data loss
+        }
+      } else {
+        console.warn('⚠️ Google Sheets API URL not configured. Data saved to localStorage only.');
+      }
+      
+      setIsSyncing(false);
+    } catch (error) {
+      console.error('❌ Error processing registration:', error);
+      setIsSyncing(false);
+      // Even if sync fails, data is saved to localStorage
+    }
   };
 
   return (

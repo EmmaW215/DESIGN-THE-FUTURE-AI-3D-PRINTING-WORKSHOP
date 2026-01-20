@@ -86,14 +86,15 @@ export interface CourseLevel {
 // ============================================
 // STRIPE CONFIGURATION
 // ============================================
-// TODO: Replace these placeholder IDs with your actual Stripe Price IDs
-// Get them from: https://dashboard.stripe.com/products
+// Stripe integration for payment processing
+// Publishable Key: Set via VITE_STRIPE_PUBLIC_KEY environment variable
 export const STRIPE_CONFIG = {
   publicKey: import.meta.env.VITE_STRIPE_PUBLIC_KEY || 'pk_test_PLACEHOLDER',
   priceIds: {
-    level1: 'price_LEVEL1_PLACEHOLDER', // Replace with actual price ID
-    level2: 'price_LEVEL2_PLACEHOLDER', // Replace with actual price ID
-    level3: 'price_LEVEL3_PLACEHOLDER', // Replace with actual price ID
+    level1: 'price_1SrjjxE6OOEHr6ZosPgc6y6u', // Level 1 - Explorer ($145 CAD)
+    level2: 'price_1SrjifE6OOEHr6ZoTFo70dEa', // Level 2 - Apprentice ($185 CAD)
+    level3: 'price_1SrjlcE6OOEHr6Zot9QtWuWJ', // Level 3 - AI Pro ($225 CAD)
+    level3_workshop: 'price_1SrjnIE6OOEHr6Zo5gPCoQdc', // Level 3 Advanced Workshop ($80 CAD)
   },
   successUrl: `${window.location.origin}/success`,
   cancelUrl: `${window.location.origin}`,
@@ -218,7 +219,7 @@ export const courses: CourseLevel[] = [
     tag: 'LEVEL 3',
     name: 'AI PRO',
     fullName: '3D AI Pro (Advanced)',
-    price: 225 + 80,
+    price: "225 + 80",
     currency: 'CAD + HST',
     stripePriceId: STRIPE_CONFIG.priceIds.level3,
     focus: 'AI-Assisted Design, Automation, and Creative Workflows',
