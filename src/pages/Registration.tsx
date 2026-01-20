@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Calendar } from '../components/registration/Calendar';
 import { PaymentSection } from '../components/registration/PaymentSection';
 import { RegistrationLedger } from '../components/registration/RegistrationLedger';
+import { RegistrationPivotTable } from '../components/registration/RegistrationPivotTable';
 import { ChevronLeft, Cloud, CloudCheck } from 'lucide-react';
 
 export default function Registration() {
@@ -117,14 +118,36 @@ export default function Registration() {
           <Calendar onRegistrationComplete={handleNewRegistration} />
         </section>
 
-        {/* Registration Spreadsheet Preview */}
+        {/* Registration Summary - Pivot Table */}
         <section className="mb-20">
-           <div className="mb-6">
+          <div className="mb-6">
             <h2 className="text-2xl font-bold flex items-center gap-2">
-              <span className="w-2 h-8 bg-emerald-500 rounded-full"></span>
-              Cloud Database Preview
+              <span className="w-2 h-8 bg-indigo-500 rounded-full"></span>
+              Registration Summary
             </h2>
-            <p className="text-sm text-slate-500 mt-1">Direct link to Google Drive Master Sheet (Read-only Preview)</p>
+            <p className="text-sm text-slate-500 mt-1">Pivot table showing registration counts by Course, Date, and Time</p>
+          </div>
+          <RegistrationPivotTable data={globalRegistrations} />
+        </section>
+
+        {/* Registration Details Table (Optional - for detailed view) */}
+        <section className="mb-20">
+           <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-bold flex items-center gap-2">
+                <span className="w-2 h-8 bg-emerald-500 rounded-full"></span>
+                Detailed Registration Records
+              </h2>
+              <p className="text-sm text-slate-500 mt-1">Direct link to Google Drive Master Sheet (Read-only Preview)</p>
+            </div>
+            <a 
+              href="https://docs.google.com/spreadsheets/d/15jlxfy2c0PrsOTgtJ0uY9CQR96_5CAB2X2E9Ey2drDU" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-xs font-bold text-white transition-colors"
+            >
+              Open Google Sheet
+            </a>
           </div>
           <RegistrationLedger data={globalRegistrations} />
         </section>

@@ -90,7 +90,8 @@ export const Calendar: React.FC<CalendarProps> = ({ onRegistrationComplete }) =>
       sessionDate: format(selectedSession.date, 'yyyy-MM-dd'),
       sessionTime: selectedSession.startTime,
       course: selectedSession.level,
-      isSeries: !selectedSession.isWorkshop
+      isSeries: !selectedSession.isWorkshop,
+      paymentProcessed: 'No' // Default to 'No', will be updated when payment is completed
     };
 
     setLocalRegistrations(prev => ({ ...prev, [key]: updatedList }));
