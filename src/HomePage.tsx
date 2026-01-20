@@ -265,8 +265,7 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight">SCAN TO <br/><span className="gradient-text">REGISTER</span></h2>
-                <p className="text-slate-500 text-lg mb-10 font-medium italic">Limited Spots Available! </p>
-                <p className="text-slate-500 text-lg mb-10 font-medium italic">Secure your child's future in the next-gen tech lab.</p>                             
+                <p className="text-slate-500 text-lg mb-10 font-medium italic">Limited Spots Available! <br /> Secure your child's future in the next-gen tech lab.</p>                             
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
@@ -315,25 +314,23 @@ export default function HomePage() {
                 </div>
                 
                 {/* Location Badge */}
-                <div className="absolute -bottom-4 -right-4 bg-white shadow-xl p-6 rounded-3xl border border-slate-100 flex items-center gap-4 hidden sm:flex">
-                  <div className="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center">
-                    <MapPin className="w-6 h-6 text-red-600" />
+                <div className="absolute -bottom-6 -right-6 bg-white shadow-xl p-3 rounded-2xl border border-slate-100 flex items-center gap-2 hidden sm:flex">
+                  <div className="w-10 h-10 bg-red-100 rounded-2xl flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-red-600" />
                   </div>
                   <div>
-                    <p className="font-black text-slate-900">Erin Mills</p>
-                    <p className="text-sm text-slate-500 font-bold uppercase">Mississauga, ON</p>
+                    <p className="font-black text-slate-900 text-xs">Erin Mills</p>
+                    <p className="text-xs text-slate-500 font-bold uppercase">Mississauga, ON</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="mt-16 text-center text-slate-400 font-medium">
-             <p><Calendar className="w-4 h-4 text-slate-400" /> Saturdays or After-School | <BookOpen className="w-4 h-4 text-slate-400" /> 3-Session Level Packs | <Box className="w-4 h-4 text-slate-400" /> Materials Included</p> 
+          <div className="mt-16 text-center text-slate-400 font-medium" style={{ textAlign: 'center' }}>
+             <p><Calendar className="w-4 h-4 text-slate-400 inline-block mr-2" /> Saturdays or After-School | <BookOpen className="w-4 h-4 text-slate-400 inline-block mr-2" /> 3-Session Level Packs | <Box className="w-4 h-4 text-slate-400 inline-block mr-2" /> Materials Included</p> 
           </div>
-          <div className="mt-16 text-center text-slate-400 font-medium">
-             <p><Calendar className="w-4 h-4 text-slate-400" /> Saturdays or After-School | <BookOpen className="w-4 h-4 text-slate-400" /> 3-Session Level Packs | <Box className="w-4 h-4 text-slate-400" /> Materials Included</p>
-          </div>
+          
         </div>
       </section>
 
