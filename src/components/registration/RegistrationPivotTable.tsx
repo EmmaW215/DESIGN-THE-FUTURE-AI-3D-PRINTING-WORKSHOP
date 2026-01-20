@@ -5,6 +5,7 @@ interface PivotRow {
   course: string;
   sessionDate: string;
   sessionTime: string;
+  isSeries: boolean;
   count: number;
 }
 
@@ -16,21 +17,33 @@ export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data }) => {
   const [filterCourse, setFilterCourse] = useState<string>('all');
   const [filterDate, setFilterDate] = useState<string>('all');
   const [filterTime, setFilterTime] = useState<string>('all');
+  const [filterIsSeries, setFilterIsSeries] = useState<string>('all');
 
   // Generate pivot data from registration details
   const pivotData = useMemo(() => {
-    const pivotMap = new Map<string, number>();
+    const pivotMap = new Map<string, { count: number; isSeries: boolean }>();
 
     data.forEach((entry) => {
       if (!entry.course || !entry.sessionDate || !entry.sessionTime) return;
 
       const key = `${entry.course}|${entry.sessionDate}|${entry.sessionTime}`;
-      pivotMap.set(key, (pivotMap.get(key) || 0) + 1);
+      const existing = pivotMap.get(key);
+      if (existing) {
+        pivotMap.set(key, { 
+          count: existing.count + 1, 
+          isSeries: entry.isSeries !== undefined ? entry.isSeries : existing.isSeries 
+        });
+      } else {
+        pivotMap.set(key, { 
+          count: 1, 
+          isSeries: entry.isSeries !== undefined ? entry.isSeries : true 
+        });
+      }
     });
 
-    const pivotRows: PivotRow[] = Array.from(pivotMap.entries()).map(([key, count]) => {
+    const pivotRows: PivotRow[] = Array.from(pivotMap.entries()).map(([key, value]) => {
       const [course, sessionDate, sessionTime] = key.split('|');
-      return { course, sessionDate, sessionTime, count };
+      return { course, sessionDate, sessionTime, isSeries: value.isSeries, count: value.count };
     });
 
     // Sort by date, then time
@@ -64,9 +77,13 @@ export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data }) => {
       if (filterCourse !== 'all' && row.course !== filterCourse) return false;
       if (filterDate !== 'all' && row.sessionDate !== filterDate) return false;
       if (filterTime !== 'all' && row.sessionTime !== filterTime) return false;
+      if (filterIsSeries !== 'all') {
+        const isSeriesFilter = filterIsSeries === 'yes';
+        if (row.isSeries !== isSeriesFilter) return false;
+      }
       return true;
     });
-  }, [pivotData, filterCourse, filterDate, filterTime]);
+  }, [pivotData, filterCourse, filterDate, filterTime, filterIsSeries]);
 
   // Calculate total registrations
   const totalRegistrations = useMemo(() => {
@@ -105,7 +122,7 @@ export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data }) => {
           <Filter className="w-4 h-4 text-slate-500" />
           <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Filters</span>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {/* Course Filter */}
           <div>
             <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">
@@ -156,6 +173,22 @@ export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data }) => {
               ))}
             </select>
           </div>
+
+          {/* Is Series Filter */}
+          <div>
+            <label className="block text-[9px] font-black text-slate-500 uppercase tracking-widest mb-1">
+              Is Series
+            </label>
+            <select
+              value={filterIsSeries}
+              onChange={(e) => setFilterIsSeries(e.target.value)}
+              className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+            >
+              <option value="all">All Types</option>
+              <option value="yes">Yes (3-Week Series)</option>
+              <option value="no">No (Workshop)</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -167,13 +200,14 @@ export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data }) => {
               <th className="px-6 py-3 border-b border-slate-800 text-[9px] font-black text-slate-500 uppercase tracking-widest">Course</th>
               <th className="px-6 py-3 border-b border-slate-800 text-[9px] font-black text-slate-500 uppercase tracking-widest">Session Date</th>
               <th className="px-6 py-3 border-b border-slate-800 text-[9px] font-black text-slate-500 uppercase tracking-widest">Session Time</th>
+              <th className="px-6 py-3 border-b border-slate-800 text-[9px] font-black text-slate-500 uppercase tracking-widest">Is Series</th>
               <th className="px-6 py-3 border-b border-slate-800 text-[9px] font-black text-slate-500 uppercase tracking-widest text-right">Registrations</th>
             </tr>
           </thead>
           <tbody>
             {filteredData.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-12 text-center text-slate-600 italic font-medium">
+                <td colSpan={5} className="px-6 py-12 text-center text-slate-600 italic font-medium">
                   No registrations found. {data.length === 0 ? 'Waiting for registrations...' : 'Try adjusting filters.'}
                 </td>
               </tr>
@@ -190,6 +224,15 @@ export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data }) => {
                   </td>
                   <td className="px-6 py-4 text-[10px] font-bold text-slate-400">
                     {row.sessionTime}
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`text-[9px] font-black px-2 py-0.5 rounded-md uppercase tracking-tighter ${
+                      row.isSeries 
+                        ? 'bg-blue-500/10 text-blue-400 border border-blue-500/20' 
+                        : 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                    }`}>
+                      {row.isSeries ? 'Yes' : 'No'}
+                    </span>
                   </td>
                   <td className="px-6 py-4 text-right">
                     <span className="inline-flex items-center justify-center min-w-[2rem] px-2 py-1 rounded-lg bg-indigo-500/10 text-indigo-400 font-black text-sm border border-indigo-500/20">
