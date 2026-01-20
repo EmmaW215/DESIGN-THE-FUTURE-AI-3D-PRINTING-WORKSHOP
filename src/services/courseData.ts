@@ -218,7 +218,7 @@ export const courses: CourseLevel[] = [
     tag: 'LEVEL 3',
     name: 'AI PRO',
     fullName: '3D AI Pro (Advanced)',
-    price: 225,
+    price: 225 + 80,
     currency: 'CAD + HST',
     stripePriceId: STRIPE_CONFIG.priceIds.level3,
     focus: 'AI-Assisted Design, Automation, and Creative Workflows',

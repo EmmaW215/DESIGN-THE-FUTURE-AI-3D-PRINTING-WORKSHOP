@@ -263,10 +263,12 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="bg-white rounded-[3rem] p-10 md:p-20 shadow-2xl border border-slate-100 overflow-hidden relative">
             <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight">SCAN TO <br/><span className="gradient-text">REGISTER</span></h2>
-                <p className="text-slate-500 text-lg mb-10 font-medium italic">Limited Spots Available! <br /> Secure your child's future in the next-gen tech lab.</p>                             
-              </div>
+              <Link to="/registration" className="group cursor-pointer">
+                <div className="transform transition-transform group-hover:scale-[1.02]">
+                  <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight">SCAN TO <br/><span className="gradient-text">REGISTER</span></h2>
+                  <p className="text-slate-500 text-lg mb-10 font-medium italic">Limited Spots Available! <br /> Secure your child's future in the next-gen tech lab.</p>
+                </div>
+              </Link>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
                 {/* WhatsAPP Card */}

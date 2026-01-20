@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './HomePage';
 import LevelDetail from './pages/LevelDetail';
 import Success from './pages/Success';
+import Registration from './pages/Registration';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         
         {/* Level Detail Pages - Course information and enrollment */}
         <Route path="/level/:id" element={<LevelDetail />} />
+        
+        {/* Course Registration Page - Calendar, registration, and payment */}
+        <Route path="/registration" element={<Registration />} />
         
         {/* Success Page - After successful payment */}
         <Route path="/success" element={<Success />} />
