@@ -10,10 +10,10 @@ export const COLORS = {
 
 // Stripe Payment Links - Direct links to Stripe hosted checkout pages
 export const STRIPE_PAYMENT_LINKS = {
-  level1: 'https://buy.stripe.com/28E4gzf6ZeYD6r68EY5c400',
-  level2: 'https://buy.stripe.com/28E8wP7ExbMr3eUcVe5c401',
-  level3: 'https://buy.stripe.com/aFa00j6AtaIn9DicVe5c402',
-  level3_workshop: 'https://buy.stripe.com/aFacN57ExeYD2aQg7q5c403',
+  level1: 'https://buy.stripe.com/cNibJ14sl6s73eU1cw5c404',
+  level2: 'https://buy.stripe.com/3cI14nf6Z5o3cPu7AU5c405',
+  level3: 'https://buy.stripe.com/bJe3cv1g903JbLqcVe5c406',
+  level3_workshop: 'https://buy.stripe.com/eVqdR91g96s76r65sM5c407',
 };
 
 export const PAYMENT_OPTIONS: PaymentOption[] = [
