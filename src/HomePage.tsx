@@ -17,7 +17,9 @@ import {
   ShieldCheck,
   Smartphone,
   QrCode,
-  Phone
+  Phone,
+  Box,
+  BookOpen
 } from 'lucide-react';
 import { getProjectIdea } from '../services/geminiService';
 
@@ -84,7 +86,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-bold mb-8 uppercase tracking-widest">
             <Zap className="w-4 h-4 text-yellow-400 fill-current" />
-            Ages 8–14 | Boutique AI & 3D Printing Studio
+            Ages 8–15 | Boutique AI & 3D Printing Studio
           </div>
           
           <h1 className="text-5xl md:text-8xl font-black mb-8 leading-[1.1] tracking-tight">
@@ -263,7 +265,8 @@ export default function HomePage() {
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl md:text-6xl font-black mb-8 leading-tight">SCAN TO <br/><span className="gradient-text">REGISTER</span></h2>
-                <p className="text-slate-500 text-lg mb-10 font-medium italic">Limited Spots Available! Secure your child's future in the next-gen tech lab.</p>                             
+                <p className="text-slate-500 text-lg mb-10 font-medium italic">Limited Spots Available! </p>
+                <p className="text-slate-500 text-lg mb-10 font-medium italic">Secure your child's future in the next-gen tech lab.</p>                             
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative">
@@ -312,7 +315,7 @@ export default function HomePage() {
                 </div>
                 
                 {/* Location Badge */}
-                <div className="absolute -bottom-6 -right-6 bg-white shadow-xl p-6 rounded-3xl border border-slate-100 flex items-center gap-4 hidden sm:flex">
+                <div className="absolute -bottom-4 -right-4 bg-white shadow-xl p-6 rounded-3xl border border-slate-100 flex items-center gap-4 hidden sm:flex">
                   <div className="w-12 h-12 bg-red-100 rounded-2xl flex items-center justify-center">
                     <MapPin className="w-6 h-6 text-red-600" />
                   </div>
@@ -326,7 +329,10 @@ export default function HomePage() {
           </div>
           
           <div className="mt-16 text-center text-slate-400 font-medium">
-             <p>Saturdays or After-School | 3-Session Level Packs | Materials Included</p>
+             <p><Calendar className="w-4 h-4 text-slate-400" /> Saturdays or After-School | <BookOpen className="w-4 h-4 text-slate-400" /> 3-Session Level Packs | <Box className="w-4 h-4 text-slate-400" /> Materials Included</p> 
+          </div>
+          <div className="mt-16 text-center text-slate-400 font-medium">
+             <p><Calendar className="w-4 h-4 text-slate-400" /> Saturdays or After-School | <BookOpen className="w-4 h-4 text-slate-400" /> 3-Session Level Packs | <Box className="w-4 h-4 text-slate-400" /> Materials Included</p>
           </div>
         </div>
       </section>

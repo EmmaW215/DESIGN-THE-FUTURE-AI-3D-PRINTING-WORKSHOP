@@ -112,7 +112,7 @@ export const courses: CourseLevel[] = [
     currency: 'CAD + HST',
     stripePriceId: STRIPE_CONFIG.priceIds.level1,
     focus: "Wonder, Physics, and the 'Magic' of Layers",
-    description: 'Perfect for curious minds with zero experience. Discover the magic behind 3D printing through hands-on activities and watch your imagination come to life!',
+    description: '<icon: 🧠> Perfect for curious minds with zero experience. Discover the magic behind 3D printing through hands-on activities and watch your imagination come to life!',
     sessionDuration: '90 mins each',
     ageRange: '8-12 years old',
     sessions: [
@@ -167,7 +167,7 @@ export const courses: CourseLevel[] = [
     currency: 'CAD + HST',
     stripePriceId: STRIPE_CONFIG.priceIds.level2,
     focus: 'Problem-Solving, Engineering Mindset, and Functional Design',
-    description: 'Ready to level up? Learn to solve real-world problems with 3D design. Create functional objects and understand the engineering behind every print!',
+    description: '<icon: 🔧> Ready to level up? Learn to solve real-world problems with 3D design. Create functional objects and understand the engineering behind every print!',
     sessionDuration: '90 mins each',
     ageRange: '10-15 years old',
     sessions: [
@@ -222,7 +222,7 @@ export const courses: CourseLevel[] = [
     currency: 'CAD + HST',
     stripePriceId: STRIPE_CONFIG.priceIds.level3,
     focus: 'AI-Assisted Design, Automation, and Creative Workflows',
-    description: 'The future is here! Combine cutting-edge AI tools with 3D printing. Learn to use AI for design generation, optimization, and create projects that push boundaries!',
+    description: '<icon: 🤖> The future is here! Combine cutting-edge AI tools with 3D printing. Learn to use AI for design generation, optimization, and create projects that push boundaries!',
     sessionDuration: '90 mins each',
     ageRange: '12-15 years old',
     sessions: [
@@ -255,7 +255,7 @@ export const courses: CourseLevel[] = [
       },
       {
         id: 4,
-        title: 'Advanced Workshop (Optional + Pay separately)',
+        title: 'Advanced Workshop (Optional + Pay extra $80 + HST separately)',
         learningPoints: [
           'documenting a project for a portfolio',
           'presenting with confidence',
