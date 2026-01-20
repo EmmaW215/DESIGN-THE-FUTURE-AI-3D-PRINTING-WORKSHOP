@@ -6,6 +6,8 @@
 
 A modern educational platform for 3D printing and AI workshops, designed for children aged 8-14. This project offers three progressive course levels with AI-powered project suggestions and integrated payment processing.
 
+https://design-the-future-ai-3-d-printing-w.vercel.app/
+
 ## Project Overview
 
 This is a **3D Printing & AI Workshop teaching website** targeting children aged 8-14, offering three progressive course levels:
