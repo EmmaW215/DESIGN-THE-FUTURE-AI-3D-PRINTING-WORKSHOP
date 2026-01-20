@@ -22,4 +22,5 @@ export interface PaymentOption {
   price: string;
   level: CourseLevel;
   sessions: string;
+  paymentLink?: string; // Stripe Payment Link URL
 }
