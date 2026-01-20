@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { 
   Users, 
   MapPin, 
@@ -20,7 +21,7 @@ import {
 } from 'lucide-react';
 import { getProjectIdea } from './services/geminiService';
 
-const App: React.FC = () => {
+export default function HomePage() {
   const [interest, setInterest] = useState('');
   const [aiIdea, setAiIdea] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -118,39 +119,45 @@ const App: React.FC = () => {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {levels.map((level) => (
-              <div key={level.id} className={`relative p-8 rounded-[2.5rem] border-4 transition-all hover:scale-[1.02] hover:shadow-2xl flex flex-col h-full bg-white ${level.color}`}>
-                <div className="absolute -top-5 left-8">
-                  <span className={`${level.badge} text-white px-4 py-1.5 rounded-full text-sm font-black tracking-widest`}>
-                    {level.tag}
-                  </span>
-                </div>
-                
-                <div className="flex justify-between items-start mb-6 pt-2">
-                  <div className="p-4 bg-white rounded-2xl shadow-sm">
-                    {level.icon}
+              <Link 
+                to={`/level/${level.id}`} 
+                key={level.id}
+                className="block group"
+              >
+                <div className={`relative p-8 rounded-[2.5rem] border-4 transition-all hover:scale-[1.02] hover:shadow-2xl flex flex-col h-full bg-white cursor-pointer ${level.color}`}>
+                  <div className="absolute -top-5 left-8">
+                    <span className={`${level.badge} text-white px-4 py-1.5 rounded-full text-sm font-black tracking-widest`}>
+                      {level.tag}
+                    </span>
                   </div>
-                  <div className="text-right">
-                    <div className="text-3xl font-black text-slate-900">{level.price}</div>
-                    <div className="text-xs font-bold text-slate-400 uppercase">{level.sessions}</div>
+                  
+                  <div className="flex justify-between items-start mb-6 pt-2">
+                    <div className="p-4 bg-white rounded-2xl shadow-sm">
+                      {level.icon}
+                    </div>
+                    <div className="text-right">
+                      <div className="text-3xl font-black text-slate-900">{level.price}</div>
+                      <div className="text-xs font-bold text-slate-400 uppercase">{level.sessions}</div>
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl font-black mb-4">{level.name}</h3>
+                  <p className="text-slate-600 leading-relaxed mb-8 flex-grow italic">
+                    {level.description}
+                  </p>
+
+                  <div className="pt-6 border-t border-slate-200/50">
+                    <ul className="space-y-3">
+                      <li className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                        <Zap className="w-4 h-4 text-yellow-500" /> 1-on-1 Mentorship
+                      </li>
+                      <li className="flex items-center gap-2 text-sm font-bold text-slate-700">
+                        <Zap className="w-4 h-4 text-yellow-500" /> Take Home Creations
+                      </li>
+                    </ul>
                   </div>
                 </div>
-
-                <h3 className="text-2xl font-black mb-4">{level.name}</h3>
-                <p className="text-slate-600 leading-relaxed mb-8 flex-grow italic">
-                  {level.description}
-                </p>
-
-                <div className="pt-6 border-t border-slate-200/50">
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-2 text-sm font-bold text-slate-700">
-                      <Zap className="w-4 h-4 text-yellow-500" /> 1-on-1 Mentorship
-                    </li>
-                    <li className="flex items-center gap-2 text-sm font-bold text-slate-700">
-                      <Zap className="w-4 h-4 text-yellow-500" /> Take Home Creations
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -329,6 +336,4 @@ const App: React.FC = () => {
       </footer>
     </div>
   );
-};
-
-export default App;
+}
