@@ -134,6 +134,20 @@
 - [ ] 测试了 "Generate Idea" 功能
 - [ ] 浏览器控制台没有错误
 
+## Registration 页面 Admin 密码（/api/admin-auth）
+
+Registration 页的「Registration Summary」默认折叠，仅管理员输入正确密码后可展开查看明细与「Open Google Sheet」链接。密码校验由 Vercel Serverless API `/api/admin-auth` 完成。
+
+**在 Vercel 中新增环境变量：**
+
+- **Name**: `ADMIN_PASSWORD`
+- **Value**: 你设定的管理员密码（例如 `DESIGN-THE-FUTURE-ai`）
+- **Environment**: Production、Preview、Development 按需勾选
+
+修改后需**重新部署**生效。该变量仅用于服务端 API，不会打入前端代码。
+
+---
+
 ## 下一步
 
 修复完成后：

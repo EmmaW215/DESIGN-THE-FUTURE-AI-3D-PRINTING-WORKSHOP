@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import {
@@ -21,6 +22,11 @@ export default function LevelDetail() {
   const { id } = useParams<{ id: string }>();
   const courseId = parseInt(id || '1', 10);
   const course = getCourseById(courseId);
+
+  // Always start from top when navigating to this level detail page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [courseId]);
 
   // Redirect to home if course not found
   if (!course) {

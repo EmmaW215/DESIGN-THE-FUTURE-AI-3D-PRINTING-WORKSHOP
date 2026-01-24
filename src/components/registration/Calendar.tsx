@@ -121,7 +121,7 @@ export const Calendar: React.FC<CalendarProps> = ({ onRegistrationComplete }) =>
         ))}
       </div>
 
-      <div className="grid grid-cols-7 auto-rows-[160px]">
+      <div className="grid grid-cols-7 auto-rows-[220px]">
         {calendarDays.map((day, idx) => {
           const sessions = getSessionsForDay(day);
           const isCurrentMonth = isSameMonth(day, monthStart);
@@ -136,7 +136,7 @@ export const Calendar: React.FC<CalendarProps> = ({ onRegistrationComplete }) =>
                 </span>
               </div>
               
-              <div className="flex flex-col gap-1 overflow-y-auto max-h-[120px] scrollbar-hide">
+              <div className="flex flex-col gap-1 overflow-y-auto max-h-[180px] scrollbar-hide">
                 {sessions.map((session) => {
                   const seriesKey = `${format(session.date, 'yyyy-MM')}-${session.level}-${format(session.date, 'EEEE')}`;
                   const key = session.isWorkshop ? session.id : seriesKey;

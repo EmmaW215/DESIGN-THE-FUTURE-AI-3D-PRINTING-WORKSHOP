@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { Filter, TrendingUp } from 'lucide-react';
+import { Filter, ExternalLink } from 'lucide-react';
+
+const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/15jlxfy2c0PrsOTgtJ0uY9CQR96_5CAB2X2E9Ey2drDU/edit?gid=0#gid=0';
 
 interface PivotRow {
   course: string;
@@ -10,9 +12,10 @@ interface PivotRow {
 
 interface PivotTableProps {
   data: any[];
+  isAdminUnlocked?: boolean;
 }
 
-export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data }) => {
+export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data, isAdminUnlocked = false }) => {
   const [filterCourse, setFilterCourse] = useState<string>('all');
   const [filterDate, setFilterDate] = useState<string>('all');
   const [filterTime, setFilterTime] = useState<string>('all');
@@ -80,14 +83,29 @@ export const RegistrationPivotTable: React.FC<PivotTableProps> = ({ data }) => {
     return 'bg-rose-600/10 text-rose-400 border border-rose-600/20';
   };
 
+  if (!isAdminUnlocked) {
+    return null;
+  }
+
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-xl">
       <div className="bg-slate-900 border-b border-slate-800 p-4">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="text-sm font-bold text-white uppercase tracking-tighter">
-            Total: {totalRegistrations} registrations
-          </span>
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-sm font-bold text-white uppercase tracking-tighter">
+              Total: {totalRegistrations} registrations
+            </span>
+          </div>
+          <a
+            href={GOOGLE_SHEET_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 rounded-lg text-xs font-bold text-white transition-colors"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            Open Google Sheet
+          </a>
         </div>
       </div>
 

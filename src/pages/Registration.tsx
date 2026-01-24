@@ -1,14 +1,16 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar } from '../components/registration/Calendar';
 import { PaymentSection } from '../components/registration/PaymentSection';
 import { RegistrationPivotTable } from '../components/registration/RegistrationPivotTable';
-import { ChevronLeft, Cloud, CloudCheck } from 'lucide-react';
+import { ChevronLeft, Cloud, CloudCheck, Lock } from 'lucide-react';
+
+const ADMIN_STORAGE_KEY = 'dtf_admin_unlocked';
 
 export default function Registration() {
   const [globalRegistrations, setGlobalRegistrations] = useState<any[]>([]);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [isAdminUnlocked, setIsAdminUnlocked] = useState(false);
 
   // Load initial data from localStorage
   useEffect(() => {
@@ -17,6 +19,38 @@ export default function Registration() {
       setGlobalRegistrations(JSON.parse(saved));
     }
   }, []);
+
+  // Restore admin unlock from sessionStorage (resets when tab closes)
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem(ADMIN_STORAGE_KEY);
+      if (stored === 'true') setIsAdminUnlocked(true);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const handleAdminClick = async () => {
+    const password = window.prompt('Enter admin password');
+    if (password == null) return;
+    try {
+      const res = await fetch('/api/admin-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (data?.ok) {
+        setIsAdminUnlocked(true);
+        sessionStorage.setItem(ADMIN_STORAGE_KEY, 'true');
+      } else {
+        window.alert('Incorrect password.');
+      }
+    } catch (e) {
+      console.error('Admin auth error:', e);
+      window.alert('Unable to verify. Check console or try again.');
+    }
+  };
 
   // Google Sheets API URL from environment variable
   const GOOGLE_SHEETS_API_URL = import.meta.env.VITE_GOOGLE_SHEETS_API_URL || '';
@@ -117,15 +151,23 @@ export default function Registration() {
           <Calendar onRegistrationComplete={handleNewRegistration} />
         </section>
 
-        {/* Registration Summary - Pivot Table */}
+        {/* Registration Summary - Pivot Table (admin-only when collapsed) */}
         <section className="mb-20">
-          <div className="mb-6">
+          <div className="mb-6 flex items-center justify-between gap-4">
             <h2 className="text-2xl font-bold flex items-center gap-2">
               <span className="w-2 h-8 bg-indigo-500 rounded-full"></span>
               Registration Summary
             </h2>
+            <button
+              type="button"
+              onClick={handleAdminClick}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-700 bg-slate-800/50 text-slate-400 hover:bg-slate-800 hover:text-white hover:border-indigo-500/50 text-xs font-bold uppercase tracking-widest transition-colors"
+            >
+              <Lock className="w-3.5 h-3.5" />
+              Admin
+            </button>
           </div>
-          <RegistrationPivotTable data={globalRegistrations} />
+          <RegistrationPivotTable data={globalRegistrations} isAdminUnlocked={isAdminUnlocked} />
         </section>
 
         {/* Payment Section */}
